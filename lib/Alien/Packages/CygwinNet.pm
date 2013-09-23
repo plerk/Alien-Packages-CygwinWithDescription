@@ -2,6 +2,8 @@ package Alien::Packages::CygwinNet;
 
 use strict;
 use warnings;
+use Cygwin::PackageDB;
+use Cygwin::PackageDB::Mirror;
 use base qw( Alien::Packages::Cygwin );
 
 # ABSTRACT: Get information from Cygwin's packages via cygcheck and Cygwin::PackageDB
@@ -100,5 +102,48 @@ sub list_packages
 This method works exactly like L<Alien::Packages::Cygwin#list_fileowners>.
 
 =cut
+
+# TODO: cache
+sub _pl
+{
+  my $self = shift;
+  
+  if(ref $self)
+  {
+    return $self->{_pl} if defined $self->{_pl};
+  }
+
+  my $db = Cygwin::PackageDB->new(scheme => 'http');
+  
+  if(defined $ENV{CYGWIN_PACKAGEDB_MIRROR})
+  {
+    $db->mirror(
+      Cygwin::PackageDB::Mirror->new($ENV{CYGWIN_PACKAGEDB_MIRROR})
+    );
+  }
+  
+  my $pl = $db->package_list( arch => $self->_arch );
+  
+  if(ref $self)
+  {
+    $self->{_pl} = $pl;
+  }  
+  
+  $pl;
+}
+
+my $arch;
+
+sub _arch
+{
+  unless(defined $arch)
+  {
+    # 32 bit uname -m returns i686 but we want x86
+    my $m = ((POSIX::uname)[4]);
+    $arch = $m eq 'x86_64' ? 'x86_64' : 'x86';
+  }
+
+  $arch;
+}
 
 1;
