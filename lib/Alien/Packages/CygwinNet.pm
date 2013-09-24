@@ -104,6 +104,7 @@ This method works exactly like L<Alien::Packages::Cygwin#list_fileowners>.
 =cut
 
 # TODO: cache
+# File::HomeDir->my_dist_data('Alien-Packages-CygwinNet', { create => 1 });
 sub _pl
 {
   my $self = shift;
