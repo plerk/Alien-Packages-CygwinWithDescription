@@ -1,24 +1,32 @@
-# Alien::Packages::CygwinNet
+# NAME
 
-Get information from Cygwin's packages via cygcheck and Cygwin::PackageDB
+Alien::Packages::CygwinNet - Get information from Cygwin's packages via cygcheck and Cygwin::PackageDB
+
+# VERSION
+
+version 0.01
 
 # SYNOPSIS
 
     # without Alien::Packages
     ues Alien::Packages::CygwinNet;
     
+
     foreach my $package (Alien::Packages::CygwinNet->list_packages)
     {
       say 'Name:    ' . $package->{Name};
       say 'Version: ' . $package->{Version};
     }
     
+
     my $perl_package = Alien::Packages::CygwinNet->list_owners('/usr/bin/perl');
     say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
     
+
     # with Alien::Packages
     use Alien::Packages;
     
+
     my $packages = Alien::Packages->new;
     foreach my $package ($packages->list_packages)
     {
@@ -26,6 +34,7 @@ Get information from Cygwin's packages via cygcheck and Cygwin::PackageDB
       say 'Version: ' . $package->{Version};
     }
     
+
     my $perl_package = $packages->list_owners('/usr/bin/perl');
     say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
 
