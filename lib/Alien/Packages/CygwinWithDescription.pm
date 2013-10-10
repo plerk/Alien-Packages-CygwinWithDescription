@@ -1,4 +1,4 @@
-package Alien::Packages::CygwinNet;
+package Alien::Packages::CygwinWithDescription;
 
 use strict;
 use warnings;
@@ -12,15 +12,15 @@ use base qw( Alien::Packages::Cygwin );
 =head1 SYNOPSIS
 
  # without Alien::Packages
- ues Alien::Packages::CygwinNet;
+ ues Alien::Packages::CygwinWithDescription;
  
- foreach my $package (Alien::Packages::CygwinNet->list_packages)
+ foreach my $package (Alien::Packages::CygwinWithDescription->list_packages)
  {
    say 'Name:    ' . $package->{Name};
    say 'Version: ' . $package->{Version};
  }
  
- my $perl_package = Alien::Packages::CygwinNet->list_owners('/usr/bin/perl');
+ my $perl_package = Alien::Packages::CygwinWithDescription->list_owners('/usr/bin/perl');
  say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
  
  # with Alien::Packages
@@ -104,7 +104,7 @@ This method works exactly like L<Alien::Packages::Cygwin#list_fileowners>.
 =cut
 
 # TODO: cache
-# File::HomeDir->my_dist_data('Alien-Packages-CygwinNet', { create => 1 });
+# File::HomeDir->my_dist_data('Alien-Packages-CygwinWithDescription', { create => 1 });
 sub _pl
 {
   my $self = shift;

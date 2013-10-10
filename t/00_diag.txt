@@ -1,0 +1,9 @@
+Alien::Packages
+Alien::Packages::Cygwin
+Cygwin::PackageDB
+Cygwin::PackageDB::Mirror
+ExtUtils::MakeMaker
+File::HomeDir::Test
+Path::Class
+Test::More
+URI::file
